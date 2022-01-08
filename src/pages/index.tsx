@@ -6,6 +6,8 @@ import { FranchiseSection } from "../components/franchise-section";
 import { getAllVideos, getAccount } from "../services/graphql";
 import { GraphQLClient } from "graphql-request";
 import { getEnvVariable } from "../utilities/env-utils";
+import { HorizontalList } from "../components/horizontal-list";
+import Video from "../components/video";
 
 export const getStaticProps = async () => {
   const gqlClient = new GraphQLClient(getEnvVariable("ENDPOINT"), {
@@ -46,6 +48,8 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <FranchiseSection />
 
         <Section genre={"Recommended for you"} videos={unSeenVideos(videos)} />
+
+        <HorizontalList items={unSeenVideos(videos)} ItemComponent={Video} />
         <Section genre={"Family"} videos={filterVideos(videos, "family")} />
         <Section genre={"Heroes"} videos={filterVideos(videos, "heroes")} />
         <Section

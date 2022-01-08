@@ -1,18 +1,16 @@
 import React from "react";
 
-export function horizontalList<T, P>({
+export function HorizontalList<T>({
   items,
-  resourceName,
-  WrappedComponent,
+  ItemComponent,
 }: {
   items: T[];
-  resourceName: string;
-  WrappedComponent: React.ComponentType<P>;
+  ItemComponent: (props: T) => JSX.Element;
 }) {
-  return (props: P) => (
+  return (
     <>
       {items.map((item, i) => (
-        <WrappedComponent key={i} {...{ [resourceName]: item }} {...props} />
+        <ItemComponent key={i} {...item} />
       ))}
     </>
   );

@@ -1,10 +1,10 @@
 const Video = ({
-  video,
-  ...props
+  thumbnail,
+  title,
 }: {
-  video: { thumbnail: { url: string }; title: string };
-  [key: string]: any;
+  thumbnail: { url: string };
+  title: string;
 }) => {
-  return <img className="card" src={video.thumbnail.url} alt={video.title} />;
+  return <img className="card" src={thumbnail.url} alt={title} />;
 };
 export default Video;
