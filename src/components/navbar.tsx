@@ -11,9 +11,9 @@ const Navbar = ({ account }: { account: AccountProps }) => {
   return (
     <div className="navbar">
       <div className="logo-wrapper">
-        <Link href="/">
+        <a href="/">
           <Image src={logo} alt="Disney Logo" width={90} height={50} />
-        </Link>
+        </a>
       </div>
       <div className="account-info">
         <p>Welcome {account.username}</p>
