@@ -1,17 +1,29 @@
 import { VideoProps } from "../model/types";
 import Card from "./card";
 
+type GenreProps =
+  | "recommended"
+  | "new"
+  | "originals"
+  | "disney"
+  | "pixar"
+  | "starwars"
+  | "natgeo"
+  | "marvel";
+
+type SectionProps = {
+  videos: VideoProps[];
+  name: string;
+};
+
 const Section = ({
   videos,
-  genre,
+  name,
   ...props
-}: {
-  videos: VideoProps[];
-  genre: string;
-} & JSX.IntrinsicElements["div"]) => {
+}: SectionProps & JSX.IntrinsicElements["div"]) => {
   return (
     <div className="section" {...props}>
-      <h3>{genre}</h3>
+      <h3>{name}</h3>
       <div>
         {videos.map((video) => (
           <a key={video.id} href={`/videos/${video.slug}`}>

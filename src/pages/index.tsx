@@ -6,6 +6,7 @@ import { FranchiseSection } from "../components/franchise-section";
 import { getAllVideos, getAccount } from "../services/graphql";
 import { GraphQLClient } from "graphql-request";
 import { getEnvVariable } from "../utilities/env-utils";
+import { useEffect, useState } from "react";
 
 export const getStaticProps = async () => {
   const gqlClient = new GraphQLClient(getEnvVariable("ENDPOINT"), {
@@ -20,66 +21,68 @@ export const getStaticProps = async () => {
       notFound: true,
     } as { notFound: true };
   }
+
+  const sections = [
+    { order: 1, tag: "new", name: "New" },
+    { order: 2, tag: "original", name: "Originals" },
+    { order: 3, tag: "disney", name: "Disney" },
+    { order: 4, tag: "pixar", name: "Pixar" },
+    { order: 5, tag: "starwars", name: "Star Wars" },
+    { order: 6, tag: "natgeo", name: "National Geographic" },
+    { order: 7, tag: "marvel", name: "Marvel" },
+  ];
+
   return {
-    props: { videos: videosData.videos, account: accountData.account },
+    props: {
+      sections,
+      videos: videosData.videos,
+      account: accountData.account,
+    },
   };
 };
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   videos,
   account,
+  sections,
 }) => {
-  const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-  const filterVideos = (videoList: VideoProps[], genre: string) =>
-    videos.filter((video) => video.tags.includes(genre));
+  const [randomVideo, setRandomVideo] = useState<VideoProps>();
 
-  const unSeenVideos = (videos: VideoProps[]) =>
+  useEffect(() => {
+    setRandomVideo(videos[Math.floor(Math.random() * videos.length)]);
+  }, []);
+
+  const filterVideos = (tag: string) =>
+    videos.filter((video) => video.tags.includes(tag));
+
+  const unSeenVideos = () =>
     videos.filter((video) => video.seen === false || video.seen === null);
 
   return (
     <>
       <Navbar account={account} />
       <div className="app">
-        <div className="main-video">
-          <img src={randomVideo.thumbnail.url} alt={randomVideo.title} />
-        </div>
+        {randomVideo && (
+          <div className="main-video">
+            <img src={randomVideo.thumbnail?.url} alt={randomVideo.title} />
+          </div>
+        )}
+
         <FranchiseSection />
-
-        <Section genre={"Recommended for you"} videos={unSeenVideos(videos)} />
-        <Section genre={"Family"} videos={filterVideos(videos, "family")} />
-        <Section genre={"Heroes"} videos={filterVideos(videos, "heroes")} />
         <Section
-          genre={"Science Fiction"}
-          videos={filterVideos(videos, "science fiction")}
+          name={"Recommended For You"}
+          videos={unSeenVideos().slice(0, 5)}
         />
-
-        <Section
-          id="disney"
-          genre={"Disney"}
-          videos={filterVideos(videos, "disney")}
-        />
-        <Section
-          id="pixar"
-          genre={"Pixar"}
-          videos={filterVideos(videos, "pixar")}
-        />
-        <Section
-          id="starwars"
-          genre={"Star Wars"}
-          videos={filterVideos(videos, "starwars")}
-        />
-        <Section
-          id="natgeo"
-          genre={"National Geographic"}
-          videos={filterVideos(videos, "natgeo")}
-        />
-        <Section
-          id="marvel"
-          genre={"Marvel"}
-          videos={filterVideos(videos, "marvel")}
-        />
+        <>
+          {sections.map((section) => (
+            <Section
+              key={section.name}
+              name={section.name}
+              videos={filterVideos(section.tag)}
+            />
+          ))}
+        </>
       </div>
-      <div></div>
     </>
   );
 };

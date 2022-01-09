@@ -12,7 +12,9 @@ const Navbar = ({ account }: { account: AccountProps }) => {
     <div className="navbar">
       <div className="logo-wrapper">
         <Link href="/">
-          <Image src={logo} alt="Disney Logo" width={90} height={50} />
+          <a>
+            <Image src={logo} alt="Disney Logo" width={90} height={50} />
+          </a>
         </Link>
       </div>
       <div className="account-info">
