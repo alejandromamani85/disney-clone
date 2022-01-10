@@ -9,17 +9,17 @@ type AccountProps = {
 
 const Navbar = ({ account }: { account: AccountProps }) => {
   return (
-    <div className="navbar">
-      <div className="logo-wrapper">
+    <div className="flex justify-between items-center px-8 h-20">
+      <div className="w-20">
         <Link href="/">
           <a>
-            <Image src={logo} alt="Disney Logo" width={90} height={50} />
+            <Image src={logo} alt="Disney Logo" />
           </a>
         </Link>
       </div>
-      <div className="account-info">
-        <p>Welcome {account.username}</p>
-        <img className="avatar" src={account.avatar.url} />
+      <div className="flex content-center items-center">
+        <span className="pr-4">Welcome {account.username} </span>
+        <img className="w-12 h-12 rounded-full" src={account.avatar.url} />
       </div>
     </div>
   );

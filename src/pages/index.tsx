@@ -49,7 +49,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const [randomVideo, setRandomVideo] = useState<VideoProps>();
 
   useEffect(() => {
-    setRandomVideo(videos[Math.floor(Math.random() * videos.length)]);
+    setRandomVideo(videos[6]);
   }, []);
 
   const filterVideos = (tag: string) =>
@@ -59,12 +59,18 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     videos.filter((video) => video.seen === false || video.seen === null);
 
   return (
-    <>
-      <Navbar account={account} />
-      <div className="app">
+    <div className="flex flex-col items-center bg-gray-900 text-white">
+      <header className="w-full">
+        <Navbar account={account} />
+      </header>
+      <main className="lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
         {randomVideo && (
-          <div className="main-video">
-            <img src={randomVideo.thumbnail?.url} alt={randomVideo.title} />
+          <div className="w-full h-80 mb-12 overflow-hidden">
+            <img
+              className="w-full"
+              src={randomVideo.thumbnail?.url}
+              alt={randomVideo.title}
+            />
           </div>
         )}
 
@@ -76,14 +82,15 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <>
           {sections.map((section) => (
             <Section
+              id={section.tag}
               key={section.name}
               name={section.name}
               videos={filterVideos(section.tag)}
             />
           ))}
         </>
-      </div>
-    </>
+      </main>
+    </div>
   );
 };
 
