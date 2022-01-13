@@ -60,10 +60,10 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   return (
     <div className="flex flex-col items-center bg-gray-900 text-white">
-      <header className="w-full">
+      <header className="w-full sticky top-0">
         <Navbar account={account} />
       </header>
-      <main className="lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
+      <main className="px-24">
         {randomVideo && (
           <div className="w-full h-80 mb-12 overflow-hidden">
             <img
