@@ -1,7 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/disney-logo.png";
-import { IconHome } from "./icons";
+import {
+  HomeIcon,
+  MoviesIcon,
+  PlusIcon,
+  SearchIcon,
+  SeriesIcon,
+  StarIcon,
+} from "./icons";
 
 type NavbarProps = {
   account: {
@@ -15,7 +22,7 @@ type ButtonNavbarProps = {
 };
 
 const ButtonNavbar = ({ children }: ButtonNavbarProps) => (
-  <div className="text-sm font-semibold mx-4">{children}</div>
+  <div className="text-sm font-semibold mx-4 flex items-center">{children}</div>
 );
 
 const Navbar = ({ account }: NavbarProps) => {
@@ -29,12 +36,30 @@ const Navbar = ({ account }: NavbarProps) => {
         </Link>
       </div>
       <div className="w-full flex px-10">
-        <ButtonNavbar>HOME</ButtonNavbar>
-        <ButtonNavbar>SEARCH</ButtonNavbar>
-        <ButtonNavbar>WATCHLIST</ButtonNavbar>
-        <ButtonNavbar>ORIGINALS</ButtonNavbar>
-        <ButtonNavbar>MOVIES</ButtonNavbar>
-        <ButtonNavbar>SERIES</ButtonNavbar>
+        <ButtonNavbar>
+          <HomeIcon className="w-5 h-5 mr-4" />
+          HOME
+        </ButtonNavbar>
+        <ButtonNavbar>
+          <SearchIcon className="w-5 h-5 mr-4" />
+          SEARCH
+        </ButtonNavbar>
+        <ButtonNavbar>
+          <PlusIcon className="w-5 h-5 mr-4" />
+          WATCHLIST
+        </ButtonNavbar>
+        <ButtonNavbar>
+          <StarIcon className="w-5 h-5 mr-4" />
+          ORIGINALS
+        </ButtonNavbar>
+        <ButtonNavbar>
+          <MoviesIcon className="w-5 h-5 mr-4" />
+          MOVIES
+        </ButtonNavbar>
+        <ButtonNavbar>
+          <SeriesIcon className="w-5 h-5 mr-4" />
+          SERIES
+        </ButtonNavbar>
       </div>
       <div className="flex shrink-0 content-center items-center">
         <span className="pr-4 uppercase">{account.username} </span>
