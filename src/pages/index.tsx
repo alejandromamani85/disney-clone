@@ -60,7 +60,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   return (
     <div className="flex flex-col items-center bg-gray-900 text-white">
-      <header className="w-full sticky top-0">
+      <header className="w-full sticky top-0 z-10">
         <Navbar account={account} />
       </header>
       <main className="px-24">
