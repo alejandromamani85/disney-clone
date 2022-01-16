@@ -9,6 +9,7 @@ import {
   SeriesIcon,
   StarIcon,
 } from "./icons";
+import { ReactNode } from "react";
 
 type NavbarProps = {
   account: {
@@ -22,7 +23,13 @@ type ButtonNavbarProps = {
 };
 
 const ButtonNavbar = ({ children }: ButtonNavbarProps) => (
-  <div className="text-sm font-semibold mx-4 flex items-center">{children}</div>
+  <div className="group text-sm font-semibold mx-4 flex items-center">
+    {children}
+  </div>
+);
+
+const LinkUnderlined = ({ children }: { children: ReactNode }) => (
+  <span className="link-underline leading-9 rounded-sm">{children}</span>
 );
 
 const Navbar = ({ account }: NavbarProps) => {
@@ -38,27 +45,27 @@ const Navbar = ({ account }: NavbarProps) => {
       <div className="w-full flex px-10">
         <ButtonNavbar>
           <HomeIcon className="w-5 h-5 mr-4" />
-          HOME
+          <LinkUnderlined>HOME</LinkUnderlined>
         </ButtonNavbar>
         <ButtonNavbar>
           <SearchIcon className="w-5 h-5 mr-4" />
-          SEARCH
+          <LinkUnderlined>SEARCH</LinkUnderlined>
         </ButtonNavbar>
         <ButtonNavbar>
           <PlusIcon className="w-5 h-5 mr-4" />
-          WATCHLIST
+          <LinkUnderlined>WATCHLIST</LinkUnderlined>
         </ButtonNavbar>
         <ButtonNavbar>
           <StarIcon className="w-5 h-5 mr-4" />
-          ORIGINALS
+          <LinkUnderlined>ORIGINALS</LinkUnderlined>
         </ButtonNavbar>
         <ButtonNavbar>
           <MoviesIcon className="w-5 h-5 mr-4" />
-          MOVIES
+          <LinkUnderlined>MOVIES</LinkUnderlined>
         </ButtonNavbar>
         <ButtonNavbar>
           <SeriesIcon className="w-5 h-5 mr-4" />
-          SERIES
+          <LinkUnderlined>SERIES</LinkUnderlined>
         </ButtonNavbar>
       </div>
       <div className="flex shrink-0 content-center items-center">
