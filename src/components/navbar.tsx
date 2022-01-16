@@ -23,18 +23,20 @@ type ButtonNavbarProps = {
 };
 
 const ButtonNavbar = ({ children }: ButtonNavbarProps) => (
-  <div className="group text-sm font-semibold mx-4 flex items-center">
+  <div className="group text-sm font-semibold p-4 flex items-center">
     {children}
   </div>
 );
 
 const LinkUnderlined = ({ children }: { children: ReactNode }) => (
-  <span className="link-underline leading-9 rounded-sm">{children}</span>
+  <span className="relative before:link-underline group-hover:before:link-underline-hover leading-9 rounded-sm">
+    {children}
+  </span>
 );
 
 const Navbar = ({ account }: NavbarProps) => {
   return (
-    <nav className="flex justify-between items-center px-6 h-20 w-full bg-black">
+    <nav className="flex justify-between items-stretch px-6 h-20 w-full bg-black">
       <div className="w-20">
         <Link href="/">
           <a>
