@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import logo from "../../public/disney-logo.png";
 import {
+  DisneyIcon,
   HomeIcon,
   MoviesIcon,
   PlusIcon,
@@ -36,11 +35,11 @@ const LinkUnderlined = ({ children }: { children: ReactNode }) => (
 
 const Navbar = ({ account }: NavbarProps) => {
   return (
-    <nav className="flex justify-between items-stretch px-6 h-20 w-full bg-black">
-      <div className="w-20">
+    <nav className="flex justify-between items-stretch px-9 h-20 w-full bg-black">
+      <div className="flex items-center">
         <Link href="/">
           <a>
-            <Image src={logo} alt="Disney Logo" />
+            <DisneyIcon className="w-20" />
           </a>
         </Link>
       </div>
