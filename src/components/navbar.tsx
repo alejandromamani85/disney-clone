@@ -45,14 +45,10 @@ const Navbar = ({ account }: NavbarProps) => {
           </Link>
         </div>
         <div className="w-full flex px-10">
-          <Link href="/">
-            <a>
-              <ButtonNavbar>
-                <HomeIcon className="w-5 h-5 mr-4" />
-                <LinkUnderlined>HOME</LinkUnderlined>
-              </ButtonNavbar>
-            </a>
-          </Link>
+          <ButtonNavbar>
+            <HomeIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>HOME</LinkUnderlined>
+          </ButtonNavbar>
           <ButtonNavbar>
             <SearchIcon className="w-5 h-5 mr-4" />
             <LinkUnderlined>SEARCH</LinkUnderlined>
