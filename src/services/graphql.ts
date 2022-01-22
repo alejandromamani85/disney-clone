@@ -51,8 +51,8 @@ export const getVideo = (
     variables
   );
 
-export const getAccount = (graphQLCLient: GraphQLClient) =>
-  graphQLCLient.request<{ account: AccountProps }>(
+export const getAccount = (graphQLClient: GraphQLClient) =>
+  graphQLClient.request<{ account: AccountProps }>(
     `
     query {
       account(where: { id: "ckxkjwj481az50b80igwqezzi" }) {

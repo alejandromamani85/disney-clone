@@ -35,45 +35,47 @@ const LinkUnderlined = ({ children }: { children: ReactNode }) => (
 
 const Navbar = ({ account }: NavbarProps) => {
   return (
-    <nav className="flex justify-between items-stretch px-9 h-20 w-full bg-black">
-      <div className="flex items-center">
-        <Link href="/">
-          <a>
-            <DisneyIcon className="w-20" />
-          </a>
-        </Link>
-      </div>
-      <div className="w-full flex px-10">
-        <ButtonNavbar>
-          <HomeIcon className="w-5 h-5 mr-4" />
-          <LinkUnderlined>HOME</LinkUnderlined>
-        </ButtonNavbar>
-        <ButtonNavbar>
-          <SearchIcon className="w-5 h-5 mr-4" />
-          <LinkUnderlined>SEARCH</LinkUnderlined>
-        </ButtonNavbar>
-        <ButtonNavbar>
-          <PlusIcon className="w-5 h-5 mr-4" />
-          <LinkUnderlined>WATCHLIST</LinkUnderlined>
-        </ButtonNavbar>
-        <ButtonNavbar>
-          <StarIcon className="w-5 h-5 mr-4" />
-          <LinkUnderlined>ORIGINALS</LinkUnderlined>
-        </ButtonNavbar>
-        <ButtonNavbar>
-          <MoviesIcon className="w-5 h-5 mr-4" />
-          <LinkUnderlined>MOVIES</LinkUnderlined>
-        </ButtonNavbar>
-        <ButtonNavbar>
-          <SeriesIcon className="w-5 h-5 mr-4" />
-          <LinkUnderlined>SERIES</LinkUnderlined>
-        </ButtonNavbar>
-      </div>
-      <div className="flex shrink-0 content-center items-center">
-        <span className="pr-4 uppercase">{account.username} </span>
-        <img className="w-12 h-12 rounded-full" src={account.avatar.url} />
-      </div>
-    </nav>
+    <header className="w-full sticky top-0 z-10">
+      <nav className="flex justify-between items-stretch px-9 h-20 w-full bg-black">
+        <div className="flex items-center">
+          <Link href="/">
+            <a>
+              <DisneyIcon className="w-20" />
+            </a>
+          </Link>
+        </div>
+        <div className="w-full flex px-10">
+          <ButtonNavbar>
+            <HomeIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>HOME</LinkUnderlined>
+          </ButtonNavbar>
+          <ButtonNavbar>
+            <SearchIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>SEARCH</LinkUnderlined>
+          </ButtonNavbar>
+          <ButtonNavbar>
+            <PlusIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>WATCHLIST</LinkUnderlined>
+          </ButtonNavbar>
+          <ButtonNavbar>
+            <StarIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>ORIGINALS</LinkUnderlined>
+          </ButtonNavbar>
+          <ButtonNavbar>
+            <MoviesIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>MOVIES</LinkUnderlined>
+          </ButtonNavbar>
+          <ButtonNavbar>
+            <SeriesIcon className="w-5 h-5 mr-4" />
+            <LinkUnderlined>SERIES</LinkUnderlined>
+          </ButtonNavbar>
+        </div>
+        <div className="flex shrink-0 content-center items-center">
+          <span className="pr-4 uppercase">{account.username} </span>
+          <img className="w-12 h-12 rounded-full" src={account.avatar.url} />
+        </div>
+      </nav>
+    </header>
   );
 };
 

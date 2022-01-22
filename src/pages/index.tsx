@@ -59,38 +59,33 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     videos.filter((video) => video.seen === false || video.seen === null);
 
   return (
-    <div className="flex flex-col items-center bg-gray-900 text-white">
-      <header className="w-full sticky top-0 z-10">
-        <Navbar account={account} />
-      </header>
-      <main className="px-24">
-        {randomVideo && (
-          <div className="w-full h-80 mb-12 overflow-hidden">
-            <img
-              className="w-full"
-              src={randomVideo.thumbnail?.url}
-              alt={randomVideo.title}
-            />
-          </div>
-        )}
+    <main className="px-24">
+      {randomVideo && (
+        <div className="w-full h-80 mb-12 overflow-hidden">
+          <img
+            className="w-full"
+            src={randomVideo.thumbnail?.url}
+            alt={randomVideo.title}
+          />
+        </div>
+      )}
 
-        <FranchiseSection />
-        <Section
-          name={"Recommended For You"}
-          videos={unSeenVideos().slice(0, 5)}
-        />
-        <>
-          {sections.map((section) => (
-            <Section
-              id={section.tag}
-              key={section.name}
-              name={section.name}
-              videos={filterVideos(section.tag)}
-            />
-          ))}
-        </>
-      </main>
-    </div>
+      <FranchiseSection />
+      <Section
+        name={"Recommended For You"}
+        videos={unSeenVideos().slice(0, 5)}
+      />
+      <>
+        {sections.map((section) => (
+          <Section
+            id={section.tag}
+            key={section.name}
+            name={section.name}
+            videos={filterVideos(section.tag)}
+          />
+        ))}
+      </>
+    </main>
   );
 };
 
