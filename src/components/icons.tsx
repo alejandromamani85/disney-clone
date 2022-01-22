@@ -19,7 +19,7 @@ export const DisneyIcon = (props: Props) => (
         style={{ display: "inline", overflow: "visible" }}
         width="1920"
         height="1080"
-        xlinkHref="BG.png"
+        xlinkHref=""
       ></image>
     </g>
     <g id="Layer_1">

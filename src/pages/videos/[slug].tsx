@@ -6,33 +6,33 @@ import {
 import { GraphQLClient } from "graphql-request";
 import { useState } from "react";
 import { getEnvVariable } from "../../utilities/env-utils";
-import { VideoProps } from "../../model/types";
 import { getVideo } from "../../services/graphql";
-import Link from "next/link";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const slug = context.query.slug as string;
+type NotFoundProps = { notFound: true };
 
-  const client = new GraphQLClient(getEnvVariable("ENDPOINT"), {
-    headers: { Authorization: `Bearer ${getEnvVariable("GRAPH_CMS_TOKEN")}` },
-  });
+export const getServerSideProps = async ({
+  query: { slug },
+}: GetServerSidePropsContext) =>
+  Promise.resolve(
+    new GraphQLClient(getEnvVariable("ENDPOINT"), {
+      headers: { Authorization: `Bearer ${getEnvVariable("GRAPH_CMS_TOKEN")}` },
+    })
+  )
+    .then((client) => getVideo(client, { slug: slug as string }))
+    .then((data) => {
+      if (!data) {
+        return {
+          notFound: true,
+        } as NotFoundProps;
+      }
 
-  const data: { video: VideoProps } = await getVideo(client, { slug });
-
-  if (!data) {
-    return {
-      notFound: true,
-    } as { notFound: true };
-  }
-
-  return {
-    props: {
-      video: data.video,
-    },
-  };
-};
+      return {
+        props: {
+          video: data.video,
+        },
+      };
+    })
+    .catch(() => Promise.reject("We have an inner error"));
 
 const changeToSeen = async (slug: string) => {
   return await fetch("/api/changeToSeen", {
@@ -44,24 +44,38 @@ const changeToSeen = async (slug: string) => {
   });
 };
 
-const Video: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
-  ({ video }) => {
-    const [watching, setWatching] = useState(false);
-    return (
-      <div className="text-white">
-        {!watching && (
-          <>
+const Video: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ video }) => {
+  const [watching, setWatching] = useState(false);
+  return (
+    <main
+      className="px-24 text-white h-screen"
+      onClick={() => (watching ? setWatching(false) : null)}
+    >
+      {!watching && (
+        <>
+          <div className="w-full h-full absolute overflow-hidden left-0 top-0">
             <img
-              className="absolute w-full"
+              className="w-full"
               src={video.thumbnail.url}
               alt={video.title}
             />
-            <div className="relative top-40 left-40">
-              <p>{video.tags.join(", ")}</p>
-              <p>{video.description}</p>
-              <Link href="/">
-                <p>go back</p>
-              </Link>
+          </div>
+
+          <div className="relative px-10 py-28 w-1/3">
+            <div>
+              {video.tags.map((tag, index) => (
+                <span
+                  key={tag}
+                  className="bg-black rounded-full px-4 py-1 font-semibold mr-2 uppercase"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <p className="py-4">{video.description}</p>
+            <div>
               <button
                 className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                 onClick={() => {
@@ -72,19 +86,24 @@ const Video: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
                 PLAY
               </button>
             </div>
-          </>
-        )}
-        {watching && (
-          <video width="100%" controls autoPlay={true}>
-            <source src={video.mp4.url} type="video/mp4" />
-          </video>
-        )}
-        <div
-          className="info-footer"
-          onClick={() => (watching ? setWatching(false) : null)}
-        ></div>
-      </div>
-    );
-  };
+          </div>
+        </>
+      )}
+      {watching && (
+        <video
+          className="w-full"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+          }}
+          controls
+          autoPlay={true}
+        >
+          <source src={video.mp4.url} type="video/mp4" />
+        </video>
+      )}
+    </main>
+  );
+};
 
 export default Video;
