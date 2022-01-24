@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { VideoProps } from "../model/types";
 import Card from "./card";
 
@@ -17,9 +18,11 @@ const Section = ({
       <div className="w-full">
         <div className="grid grid-rows-1 grid-cols-5 gap-x-4">
           {videos.map((video) => (
-            <a key={video.id} href={`/videos/${video.slug}`}>
-              <Card {...video} />
-            </a>
+            <Link key={video.id} href={`/videos/${video.slug}`}>
+              <a>
+                <Card {...video} />
+              </a>
+            </Link>
           ))}
         </div>
       </div>
