@@ -22,7 +22,7 @@ type ButtonNavbarProps = {
 };
 
 const ButtonNavbar = ({ children }: ButtonNavbarProps) => (
-  <div className="group text-sm font-semibold p-4 flex items-center">
+  <div className="group text-sm font-semibold p-4 flex items-center h-full">
     {children}
   </div>
 );
@@ -45,30 +45,54 @@ const Navbar = ({ account }: NavbarProps) => {
           </Link>
         </div>
         <div className="w-full flex px-10">
-          <ButtonNavbar>
-            <HomeIcon className="w-5 h-5 mr-4" />
-            <LinkUnderlined>HOME</LinkUnderlined>
-          </ButtonNavbar>
-          <ButtonNavbar>
-            <SearchIcon className="w-5 h-5 mr-4" />
-            <LinkUnderlined>SEARCH</LinkUnderlined>
-          </ButtonNavbar>
-          <ButtonNavbar>
-            <PlusIcon className="w-5 h-5 mr-4" />
-            <LinkUnderlined>WATCHLIST</LinkUnderlined>
-          </ButtonNavbar>
-          <ButtonNavbar>
-            <StarIcon className="w-5 h-5 mr-4" />
-            <LinkUnderlined>ORIGINALS</LinkUnderlined>
-          </ButtonNavbar>
-          <ButtonNavbar>
-            <MoviesIcon className="w-5 h-5 mr-4" />
-            <LinkUnderlined>MOVIES</LinkUnderlined>
-          </ButtonNavbar>
-          <ButtonNavbar>
-            <SeriesIcon className="w-5 h-5 mr-4" />
-            <LinkUnderlined>SERIES</LinkUnderlined>
-          </ButtonNavbar>
+          <Link href="/">
+            <a>
+              <ButtonNavbar>
+                <HomeIcon className="w-5 h-5 mr-4" />
+                <LinkUnderlined>HOME</LinkUnderlined>
+              </ButtonNavbar>
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <ButtonNavbar>
+                <SearchIcon className="w-5 h-5 mr-4" />
+                <LinkUnderlined>SEARCH</LinkUnderlined>
+              </ButtonNavbar>
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <ButtonNavbar>
+                <PlusIcon className="w-5 h-5 mr-4" />
+                <LinkUnderlined>WATCHLIST</LinkUnderlined>
+              </ButtonNavbar>
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <ButtonNavbar>
+                <StarIcon className="w-5 h-5 mr-4" />
+                <LinkUnderlined>ORIGINALS</LinkUnderlined>
+              </ButtonNavbar>
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <ButtonNavbar>
+                <MoviesIcon className="w-5 h-5 mr-4" />
+                <LinkUnderlined>MOVIES</LinkUnderlined>
+              </ButtonNavbar>
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <ButtonNavbar>
+                <SeriesIcon className="w-5 h-5 mr-4" />
+                <LinkUnderlined>SERIES</LinkUnderlined>
+              </ButtonNavbar>
+            </a>
+          </Link>
         </div>
         <div className="flex shrink-0 content-center items-center">
           <span className="pr-4 uppercase">{account.username} </span>

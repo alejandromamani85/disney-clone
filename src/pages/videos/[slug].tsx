@@ -1,24 +1,39 @@
 import {
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
   NextPage,
 } from "next";
 import { GraphQLClient } from "graphql-request";
 import { useState } from "react";
 import { getEnvVariable } from "../../utilities/env-utils";
 import { getVideo } from "../../services/graphql";
+import { ParsedUrlQuery } from "querystring";
 
 type NotFoundProps = { notFound: true };
 
-export const getServerSideProps = async ({
-  query: { slug },
-}: GetServerSidePropsContext) =>
+type ParamsProps = {
+  slug: string;
+} & ParsedUrlQuery;
+
+export const getStaticPaths: GetStaticPaths = () => ({
+  paths: [],
+  fallback: "blocking",
+});
+
+export const getStaticProps = async ({
+  params,
+}: GetStaticPropsContext<ParamsProps>) =>
   Promise.resolve(
     new GraphQLClient(getEnvVariable("ENDPOINT"), {
       headers: { Authorization: `Bearer ${getEnvVariable("GRAPH_CMS_TOKEN")}` },
     })
   )
-    .then((client) => getVideo(client, { slug: slug as string }))
+    .then((client) =>
+      getVideo(client, {
+        slug: params?.slug ?? "", //params ? ("slug" in params ? (params.slug as string) : "") : "",
+      })
+    )
     .then((data) => {
       if (!data) {
         return {
@@ -30,6 +45,7 @@ export const getServerSideProps = async ({
         props: {
           video: data.video,
         },
+        revalidate: 10,
       };
     })
     .catch(() => Promise.reject("We have an inner error"));
@@ -44,28 +60,27 @@ const changeToSeen = async (slug: string) => {
   });
 };
 
-const Video: NextPage<
-  InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ video }) => {
+const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  video,
+}) => {
   const [watching, setWatching] = useState(false);
   return (
     <main
-      className="px-24 text-white h-screen"
+      className="absolute top-0 w-full h-full bg-gray-900 px-24 text-white"
       onClick={() => (watching ? setWatching(false) : null)}
     >
       {!watching && (
         <>
-          <div className="w-full h-full absolute overflow-hidden left-0 top-0">
+          <div className="w-full h-full absolute top-0 left-0 overflow-hidden">
             <img
               className="w-full"
               src={video.thumbnail.url}
               alt={video.title}
             />
           </div>
-
-          <div className="relative px-10 py-28 w-1/3">
+          <div className="relative px-10 py-36 w-1/3">
             <div>
-              {video.tags.map((tag, index) => (
+              {video.tags.map((tag) => (
                 <span
                   key={tag}
                   className="bg-black rounded-full px-4 py-1 font-semibold mr-2 uppercase"
@@ -90,17 +105,19 @@ const Video: NextPage<
         </>
       )}
       {watching && (
-        <video
-          className="w-full"
-          onClick={(e) => {
-            e.stopPropagation();
-            e.nativeEvent.stopImmediatePropagation();
-          }}
-          controls
-          autoPlay={true}
-        >
-          <source src={video.mp4.url} type="video/mp4" />
-        </video>
+        <>
+          <video
+            className="absolute top-20 left-0 w-full"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+            }}
+            controls
+            autoPlay={true}
+          >
+            <source src={video.mp4.url} type="video/mp4" />
+          </video>
+        </>
       )}
     </main>
   );
