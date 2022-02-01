@@ -49,7 +49,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const [randomVideo, setRandomVideo] = useState<VideoProps>();
 
   useEffect(() => {
-    setRandomVideo(videos[6]);
+    setRandomVideo(videos[Math.floor(videos.length * Math.random())]);
   }, []);
 
   const filterVideos = (tag: string) =>
@@ -61,12 +61,14 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   return (
     <main className="px-24">
       {randomVideo && (
-        <div className="w-full h-80 mb-12 overflow-hidden">
-          <img
-            className="w-full"
-            src={randomVideo.thumbnail?.url}
-            alt={randomVideo.title}
-          />
+        <div className="w-full mb-12 overflow-hidden">
+          <div className="flex-shrink-0">
+            <img
+              className="aspect-[3.9/1] w-full object-cover object-top"
+              src={randomVideo.thumbnail?.url}
+              alt={randomVideo.title}
+            />
+          </div>
         </div>
       )}
 
