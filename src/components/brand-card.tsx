@@ -5,7 +5,7 @@ const BrandCard = ({
 }: { src: StaticImageData } & JSX.IntrinsicElements["div"]) => {
   return (
     <div
-      className="bg-gray-800 rounded-lg shadow-xl shadow-black border-2 border-gray-700"
+      className="rounded-lg border-2 border-gray-700 bg-gray-800 shadow-xl shadow-black"
       {...props}
     >
       <Image src={src} />
