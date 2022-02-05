@@ -61,7 +61,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   return (
     <main className="px-24">
       {randomVideo && (
-        <div className="w-full mb-12 overflow-hidden">
+        <div className="mb-12 w-full overflow-hidden">
           <div className="flex-shrink-0">
             <img
               className="aspect-[3.9/1] w-full object-cover object-top"

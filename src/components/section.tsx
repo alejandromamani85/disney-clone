@@ -14,9 +14,9 @@ const Section = ({
 }: SectionProps & JSX.IntrinsicElements["div"]) => {
   return (
     <div className="pt-4" {...props}>
-      <h3 className="text-lg font-bold py-2">{name}</h3>
+      <h3 className="py-2 text-lg font-bold">{name}</h3>
       <div className="w-full">
-        <div className="grid grid-rows-1 grid-cols-5 gap-x-4">
+        <div className="grid grid-cols-5 grid-rows-1 gap-x-4">
           {videos.map((video) => (
             <Link key={video.id} href={`/videos/${video.slug}`}>
               <a>

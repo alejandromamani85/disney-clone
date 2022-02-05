@@ -66,24 +66,24 @@ const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const [watching, setWatching] = useState(false);
   return (
     <main
-      className="absolute top-0 w-full h-full bg-gray-900 px-24 text-white"
+      className="absolute top-0 h-full w-full bg-gray-900 px-24 text-white"
       onClick={() => (watching ? setWatching(false) : null)}
     >
       {!watching && (
         <>
-          <div className="w-full h-full absolute top-0 left-0 overflow-hidden">
+          <div className="absolute top-0 left-0 h-full w-full overflow-hidden">
             <img
               className="w-full"
               src={video.thumbnail.url}
               alt={video.title}
             />
           </div>
-          <div className="relative px-10 py-36 w-1/3">
+          <div className="relative w-1/3 px-10 py-36">
             <div>
               {video.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-black rounded-full px-4 py-1 font-semibold mr-2 uppercase"
+                  className="mr-2 rounded-full bg-black px-4 py-1 font-semibold uppercase"
                 >
                   {tag}
                 </span>
@@ -92,7 +92,7 @@ const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <p className="py-4">{video.description}</p>
             <div>
               <button
-                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
                 onClick={() => {
                   changeToSeen(video.slug);
                   watching ? setWatching(false) : setWatching(true);
