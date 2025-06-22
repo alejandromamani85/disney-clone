@@ -6,21 +6,20 @@ import marvelLogo from "../../public/marvel-button.png";
 import BrandCard from "./brand-card";
 
 export const FranchiseSection = () => (
-  <div className="grid grid-cols-5 gap-x-4">
-    <a href="#disney">
-      <BrandCard src={disneyLogo} />
-    </a>
-    <a href="#pixar">
-      <BrandCard src={pixarLogo} />
-    </a>
-    <a href="#marvel">
-      <BrandCard src={marvelLogo} />
-    </a>
-    <a href="#starwars">
-      <BrandCard src={starwarsLogo} />
-    </a>
-    <a href="#natgeo">
-      <BrandCard src={natgeoLogo} />
-    </a>
-  </div>
+  <>
+    <div className="hidden sm:grid sm:grid-cols-5 sm:gap-6">
+      <BrandCard src={disneyLogo} href="#disney" />
+      <BrandCard src={pixarLogo} href="#pixar" />
+      <BrandCard src={marvelLogo} href="#marvel" />
+      <BrandCard src={starwarsLogo} href="#starwars" />
+      <BrandCard src={natgeoLogo} href="#natgeo" />
+    </div>
+    <div className="grid grid-cols-6 gap-4 sm:hidden">
+      <BrandCard src={disneyLogo} href="#disney" className="col-span-2" />
+      <BrandCard src={pixarLogo} href="#pixar" className="col-span-2" />
+      <BrandCard src={marvelLogo} href="#marvel" className="col-span-2" />
+      <BrandCard src={starwarsLogo} href="#starwars" className="col-span-2 col-start-2" />
+      <BrandCard src={natgeoLogo} href="#natgeo" className="col-span-2 col-start-4" />
+    </div>
+  </>
 );

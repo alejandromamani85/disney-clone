@@ -59,7 +59,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     videos.filter((video) => video.seen === false || video.seen === null);
 
   return (
-    <main className="px-24">
+    <main className="px-4 sm:px-6 lg:px-24">
       {randomVideo && (
         <div className="mb-12 w-full overflow-hidden">
           <div className="flex-shrink-0">

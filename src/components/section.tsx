@@ -16,7 +16,7 @@ const Section = ({
     <div className="pt-4" {...props}>
       <h3 className="py-2 text-lg font-bold">{name}</h3>
       <div className="w-full">
-        <div className="grid grid-cols-5 grid-rows-1 gap-x-4">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-5 sm:gap-x-6">
           {videos.map((video) => (
             <Link key={video.id} href={`/videos/${video.slug}`}>
               <a>
