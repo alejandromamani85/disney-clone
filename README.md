@@ -7,4 +7,4 @@
 - GraphCMS (Graphql Content Api)
 
 Would you like to take a look at my project?
-Plese visit: https://ale-disney-clone.netlify.app/
+Please visit: https://ale-disney-clone.netlify.app/
