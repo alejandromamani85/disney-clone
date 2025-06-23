@@ -110,9 +110,9 @@ const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         </>
       )}
       {watching && (
-        <>
+        <div className="fixed inset-0 z-50 bg-black">
           <video
-            className="absolute top-20 left-0 w-full"
+            className="h-full w-full object-contain"
             onClick={(e) => {
               e.stopPropagation();
               e.nativeEvent.stopImmediatePropagation();
@@ -122,7 +122,7 @@ const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           >
             <source src={video.mp4.url} type="video/mp4" />
           </video>
-        </>
+        </div>
       )}
     </main>
   );
