@@ -9,7 +9,7 @@ import { useState } from "react";
 import { getEnvVariable } from "../../utilities/env-utils";
 import { getVideo } from "../../services/graphql";
 import { ParsedUrlQuery } from "querystring";
-import { PlayIcon } from "../../components/icons";
+import { CloseIcon, PlayIcon } from "../../components/icons";
 
 type NotFoundProps = { notFound: true };
 
@@ -111,6 +111,12 @@ const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       )}
       {watching && (
         <div className="fixed inset-0 z-50 bg-black">
+          <button
+            className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black bg-opacity-50 text-white transition-all duration-200 hover:bg-opacity-75"
+            onClick={() => setWatching(false)}
+          >
+            <CloseIcon className="h-6" />
+          </button>
           <video
             className="h-full w-full object-contain"
             onClick={(e) => {
