@@ -9,6 +9,7 @@ import { useState } from "react";
 import { getEnvVariable } from "../../utilities/env-utils";
 import { getVideo } from "../../services/graphql";
 import { ParsedUrlQuery } from "querystring";
+import { PlayIcon } from "../../components/icons";
 
 type NotFoundProps = { notFound: true };
 
@@ -66,38 +67,42 @@ const Video: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const [watching, setWatching] = useState(false);
   return (
     <main
-      className="absolute top-0 h-full w-full bg-gray-900 px-24 text-white"
+      className="absolute top-0 h-full w-full bg-gray-900 px-4 text-white lg:px-24"
       onClick={() => (watching ? setWatching(false) : null)}
     >
       {!watching && (
         <>
-          <div className="absolute top-0 left-0 h-full w-full overflow-hidden">
+          <div className="mt-20 grid grid-cols-1 gap-4 lg:grid-cols-2">
             <img
-              className="w-full"
+              className="w-full rounded-lg"
               src={video.thumbnail.url}
               alt={video.title}
             />
-          </div>
-          <div className="relative w-1/3 px-10 py-36">
-            <div>
-              {video.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="mr-2 rounded-full bg-black px-4 py-1 font-semibold uppercase"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <p className="py-4">{video.description}</p>
-            <div>
+            <div className="flex flex-col items-start justify-between rounded-lg border-2 border-gray-700 bg-gray-800 p-6 sm:flex-row sm:items-center lg:px-28">
+              <div>
+                <h2 className="text-3xl font-bold uppercase">{video.title}</h2>
+                <br />
+                <p className="text-lg">{video.description}</p>
+                <br />
+                <div className="py-4">
+                  {video.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="mr-2 rounded-full bg-gray-500 px-4 py-2 font-semibold uppercase"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
               <button
-                className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
+                className="mt-6 flex w-full items-center justify-center rounded border border-gray-400 bg-white p-3 py-2 px-4 text-lg font-semibold text-gray-800 shadow hover:bg-gray-100 sm:w-auto lg:p-4"
                 onClick={() => {
                   changeToSeen(video.slug);
                   watching ? setWatching(false) : setWatching(true);
                 }}
               >
+                <PlayIcon className="my-2 mr-2 h-5" />
                 PLAY
               </button>
             </div>
